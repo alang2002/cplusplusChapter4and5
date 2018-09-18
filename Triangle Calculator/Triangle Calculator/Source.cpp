@@ -7,16 +7,20 @@ using namespace std;
 double perimeter;
 double area;
 
-void setPerimeter(double sideA, double sideB, double sideC) {
-	perimeter = sideA + sideB + sideC;
-}
-
 void setRightArea(double sideA, double sideB) {
 	area = (sideA * sideB) / 2;
 }
 
 void setIsocelesArea(double sideB, double height) {
 	area = (sideB * height) / 2;
+}
+
+void setEquilateralArea(double sideA) {
+	area = (sqrt(3) / 4) * (sideA * sideA);
+}
+
+void setPerimeter(double sideA, double sideB, double sideC) {
+	perimeter = sideA + sideB + sideC;
 }
 
 double getPerimeter() {
@@ -95,6 +99,15 @@ double isoscelesTriangle() {
 	return result;
 }
 
+double equilateralTriangle() {
+	double sidesLength;
+	cout << "Enter one side length: ";
+	cin >> sidesLength;
+	setPerimeter(sidesLength, sidesLength, sidesLength);
+	setEquilateralArea(sidesLength);
+	return 0.0;
+}
+
 int main() {
 	int triangleType;
 	double output;
@@ -102,26 +115,39 @@ int main() {
 	char whichSide;
 
 		cout << "Hello user. What kind of triangle are you trying to solve for?" << endl;
-		cout << "1 - Right Triangle" << endl;
-		cout << "2 - Isosceles Triangle" << endl;
-		cout << "3 - Equilateral Triangle" << endl;
-		cout << "Please enter the number of the type of triangle >> ";
-		cin >> triangleType;
+		do {
+			cout << "1 - Right Triangle" << endl;
+			cout << "2 - Isosceles Triangle" << endl;
+			cout << "3 - Equilateral Triangle" << endl;
+			cout << "Please enter the number of the type of triangle >> ";
+			cin >> triangleType;
 
-		if (triangleType == 1) {
-			cout << "Which side are you solving for? (A, B or C) >> ";
-			cin >> whichSide;
-			output = rightTriangle(whichSide);
-			cout << "Your missing side has a length of: " << output << endl;
-			cout << "Perimeter is: " << getPerimeter() << endl;
-			cout << "Area is: " << getArea() << endl;
-		}
-		else if (triangleType == 2) {
-			output = isoscelesTriangle();
-			cout << "Your height is: " << output << endl;
-			cout << "Perimeter is: " << getPerimeter() << endl;
-			cout << "Area is: " << getArea() << endl;
-		}
+			if (triangleType == 1) {
+				cout << "Which side are you solving for? (A, B or C) >> ";
+				cin >> whichSide;
+				output = rightTriangle(whichSide);
+				cout << "Your missing side has a length of: " << output << endl;
+				cout << "Perimeter is: " << getPerimeter() << endl;
+				cout << "Area is: " << getArea() << endl;
+				cout << "Type STOP to end the program, or enter any other word to continue >> ";
+				cin >> stop;
+			}
+			else if (triangleType == 2) {
+				output = isoscelesTriangle();
+				cout << "Your height is: " << output << endl;
+				cout << "Perimeter is: " << getPerimeter() << endl;
+				cout << "Area is: " << getArea() << endl;
+				cout << "Type STOP to end the program, or enter any other word to continue >> ";
+				cin >> stop;
+			}
+			else if (triangleType == 3) {
+				output = equilateralTriangle();
+				cout << "Your perimeter is: " << getPerimeter() << endl;
+				cout << "Your area is: " << getArea() << endl;
+				cout << "Type STOP to end the program, or enter any other word to continue >> ";
+				cin >> stop;
+			}
+		} while (stop != "STOP");
 	
 	system("pause");
 	return 0;
