@@ -15,6 +15,10 @@ void setRightArea(double sideA, double sideB) {
 	area = (sideA * sideB) / 2;
 }
 
+void setIsocelesArea(double sideB, double height) {
+	area = (sideB * height) / 2;
+}
+
 double getPerimeter() {
 	return perimeter;
 }
@@ -74,6 +78,23 @@ double rightTriangle(char whichSide) {
 	}
 }
 
+double isoscelesTriangle() {
+	double sideOne;
+	double sideTwo;
+	double result;
+
+	cout << "Enter side A length: ";
+	cin >> sideOne;
+	cout << "Enter side B length: ";
+	cin >> sideTwo;
+
+	result = (sideOne * sideOne) - ((sideTwo * sideTwo) / 4);
+	result = sqrt(result);
+	setPerimeter(sideOne, sideOne, sideTwo);
+	setIsocelesArea(sideTwo, result);
+	return result;
+}
+
 int main() {
 	int triangleType;
 	double output;
@@ -92,6 +113,12 @@ int main() {
 			cin >> whichSide;
 			output = rightTriangle(whichSide);
 			cout << "Your missing side has a length of: " << output << endl;
+			cout << "Perimeter is: " << getPerimeter() << endl;
+			cout << "Area is: " << getArea() << endl;
+		}
+		else if (triangleType == 2) {
+			output = isoscelesTriangle();
+			cout << "Your height is: " << output << endl;
 			cout << "Perimeter is: " << getPerimeter() << endl;
 			cout << "Area is: " << getArea() << endl;
 		}
